@@ -1,0 +1,3 @@
+include ':app', ':adminauctionapp'
+rootProject.name='test'
+project(':adminauctionapp').projectDir = new File('adminapps')

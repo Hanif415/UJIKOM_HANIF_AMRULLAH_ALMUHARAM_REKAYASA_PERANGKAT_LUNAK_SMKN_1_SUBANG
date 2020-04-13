@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_stuff">
+
+    <fragment
+        android:id="@+id/navigation_stuff"
+        android:name="com.hanif.adminapps.ui.stuff.StuffFragment"
+        android:label="@string/title_stuff"
+        tools:layout="@layout/fragment_stuff" >
+        <action
+            android:id="@+id/action_navigation_stuff_to_detaiStuffFragment"
+            app:destination="@id/detailStuffFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
+        <action
+            android:id="@+id/action_navigation_stuff_to_addStuffFragment"
+            app:destination="@id/addStuffFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_navigation_stuff_to_editStuffFragment"
+            app:destination="@id/editStuffFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
+        <action
+            android:id="@+id/action_navigation_stuff_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_auction"
+        android:name="com.hanif.adminapps.ui.auction.AuctionFragment"
+        android:label="@string/title_auction"
+        tools:layout="@layout/fragment_auction" >
+        <action
+            android:id="@+id/action_navigation_auction_to_detailAuctionFragment"
+            app:destination="@id/detailAuctionFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailStuffFragment"
+        android:name="com.hanif.adminapps.ui.stuff.crud.DetailStuffFragment"
+        android:label="fragment_detail_stuff"
+        tools:layout="@layout/fragment_detail_stuff" />
+    <fragment
+        android:id="@+id/addStuffFragment"
+        android:name="com.hanif.adminapps.ui.stuff.crud.AddStuffFragment"
+        android:label="fragment_add_stuff"
+        tools:layout="@layout/fragment_add_stuff" />
+    <fragment
+        android:id="@+id/editStuffFragment"
+        android:name="com.hanif.adminapps.ui.stuff.crud.EditStuffFragment"
+        android:label="fragment_edit_stuff"
+        tools:layout="@layout/fragment_edit_stuff" />
+    <fragment
+        android:id="@+id/detailAuctionFragment"
+        android:name="com.hanif.adminapps.ui.auction.DetailAuctionFragment"
+        android:label="fragment_detail_auction"
+        tools:layout="@layout/fragment_detail_auction" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.hanif.adminapps.ui.login.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
+
+</navigation>

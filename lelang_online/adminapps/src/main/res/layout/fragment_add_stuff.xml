@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".ui.stuff.crud.AddStuffFragment">
+
+    <EditText
+        android:id="@+id/edt_stuff_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingStart="16dp"
+        android:hint="@string/stuff_name_label"
+        android:background="@drawable/edit_text_with_border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edt_date"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingStart="16dp"
+        android:hint="@string/date_hint"
+        android:layout_marginTop="8dp"
+        android:inputType="datetime"
+        android:background="@drawable/edit_text_with_border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_stuff_name" />
+
+    <EditText
+        android:id="@+id/edt_stuff_price"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="16dp"
+        android:hint="@string/stuff_price_label"
+        android:layout_marginTop="8dp"
+        android:inputType="number"
+        android:background="@drawable/edit_text_with_border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_date" />
+
+    <EditText
+        android:id="@+id/edt_stuff_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_with_border"
+        android:padding="16dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/description_label"
+        android:inputType="textMultiLine"
+        android:lines="8"
+        android:maxLines="255"
+        android:minLines="3"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_stuff_price" />
+
+    <Button
+        android:id="@+id/btn_add_stuff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/add_label"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_stuff_description" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
