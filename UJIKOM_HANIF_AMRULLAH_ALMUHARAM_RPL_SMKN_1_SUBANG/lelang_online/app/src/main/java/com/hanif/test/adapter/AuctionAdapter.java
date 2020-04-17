@@ -21,8 +21,6 @@ import java.util.List;
 
 public class AuctionAdapter extends RecyclerView.Adapter<AuctionAdapter.StuffViewHolder> {
 
-    private Context context;
-    private List<Auction> auctions;
     private ArrayList<Auction> mData = new ArrayList<>();
 
     public void setDataAuction(ArrayList<Auction> auctions) {
@@ -57,6 +55,8 @@ public class AuctionAdapter extends RecyclerView.Adapter<AuctionAdapter.StuffVie
         public static final String EXTRA_ID = "extra_id";
         public static final String EXTRA_STATUS = "extra_status";
         public static final String EXTRA_STUFF_ID = "extra_stuff_id";
+        public static final String EXTRA_PRICE = "extra_price";
+        public static final String EXTRA_STUFF = "extra_stuff";
 
         StuffViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,6 +84,8 @@ public class AuctionAdapter extends RecyclerView.Adapter<AuctionAdapter.StuffVie
             mBundle.putString(EXTRA_ID, auction.getIdLelang());
             mBundle.putString(EXTRA_STATUS, auction.getStatus());
             mBundle.putString(EXTRA_STUFF_ID, auction.getIdBarang());
+            mBundle.putString(EXTRA_PRICE, auction.getHaragaAkhir());
+            mBundle.putString(EXTRA_STUFF, auction.getNamaBarang());
 
             Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_detailAuctionStuffFragment, mBundle);
         }

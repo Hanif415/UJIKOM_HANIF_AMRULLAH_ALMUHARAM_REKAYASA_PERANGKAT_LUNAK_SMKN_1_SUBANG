@@ -22,36 +22,28 @@ Route::group(['prefix' => 'v1'], function () {
 
     // lelang
     Route::resource('lelang', 'LelangController', [
-        'only' => ['update', 'destroy']
+        'only' => ['update', 'destroy', 'index']
     ]);
 
-    Route::post('/lelang/store/{id_barang}', [
+    Route::post('/lelang/store/', [
         'uses' => 'LelangController@store'
     ])->name('lelang.store');
 
-    // masyarakat
-    Route::post('/masyarakat/register', [
-        'uses' => 'AuthMasyakatController@register'
-    ])->name('masyarakat.register');
+    Route::get('/histori', [
+        'uses' => 'PenawaranController@histori'
+    ])->name('lelang.histori');
 
-    Route::post('/masyarakat/signin', [
-        'uses' => 'AuthMasyakatController@signin'
-    ])->name('masyarakat.signin');
+    // Auth
+    Route::post('/user/register', [
+        'uses' => 'AuthController@store'
+    ])->name('user.register');
 
-    Route::put('/masyarakat/update/{id_masyarakat}', [
-        'uses' => 'AuthMasyakatController@update'
-    ])->name('masyarakat.update');
+    Route::post('/user/signin', [
+        'uses' => 'AuthController@signin'
+    ])->name('user.signin');
 
-    // petugas
-    Route::post('/petugas/register', [
-        'uses' => 'AuthPetugasController@register'
-    ])->name('petugas.register');
-
-    Route::post('/petugas/signin', [
-        'uses' => 'AuthPetugasController@signin'
-    ])->name('petugas.signin');;
-
-    Route::put('/petugas/update/{id_petugas}', [
-        'uses' => 'AuthPetugasController@update'
-    ])->name('petugas.update');
+    // penawaran
+    Route::resource('penawaran', 'PenawaranController', [
+        'only' => ['update']
+    ]);
 });

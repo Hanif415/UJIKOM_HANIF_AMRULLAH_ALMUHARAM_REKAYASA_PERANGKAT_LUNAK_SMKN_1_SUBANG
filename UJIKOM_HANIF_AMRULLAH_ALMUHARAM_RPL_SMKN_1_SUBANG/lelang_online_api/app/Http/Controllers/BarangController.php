@@ -18,8 +18,8 @@ class BarangController extends Controller
         }
 
         $response = [
-            'msg' => 'List of All Meetings',
-            'meetings' => $barang
+            'message' => 'List of All Stuffs',
+            'result' => $barang
         ];
 
         return response()->json($response, 200);
@@ -28,14 +28,12 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         $nama_barang = $request->input('nama_barang');
-        $kategori_barang = $request->input('kategori_barang');
         $tgl = $request->input('tgl');
         $harga_awal = $request->input('harga_awal');
         $deskripsi_barang = $request->input('deskripsi_barang');
 
         $barang = new Barang([
             'nama_barang' => $nama_barang,
-            'kategori_barang' => $kategori_barang,
             'tgl' => $tgl,
             'harga_awal' => $harga_awal,
             'deskripsi_barang' => $deskripsi_barang
@@ -48,7 +46,7 @@ class BarangController extends Controller
             ];
 
             $message = [
-                'msg' => 'Barang Ditambahkan',
+                'message' => 'Item added',
                 'meeting' => $barang
             ];
 
@@ -72,8 +70,10 @@ class BarangController extends Controller
         ];
 
         $response = [
-            'msg' => 'Meeting Information',
-            'barang' => $barang
+            'msg' => 'Stuff Information',
+            'nama_barang' => $barang->nama_barang,
+            'deskripsi_barang' => $barang->deskripsi_barang,
+            'harga_awal' => $barang->harga_awal,
         ];
 
         return response()->json($response, 200);
@@ -89,7 +89,6 @@ class BarangController extends Controller
         // ]);
 
         $nama_barang = $request->input('nama_barang');
-        $kategori_barang = $request->input('kategori_barang');
         $tgl = $request->input('tgl');
         $harga_awal = $request->input('harga_awal');
         $deskripsi_barang = $request->input('deskripsi_barang');
@@ -103,7 +102,6 @@ class BarangController extends Controller
         // };
 
         $barang->nama_barang = $nama_barang;
-        $barang->kategori_barang = $kategori_barang;
         $barang->tgl = $tgl;
         $barang->harga_awal = $harga_awal;
         $barang->deskripsi_barang = $deskripsi_barang;
@@ -122,7 +120,7 @@ class BarangController extends Controller
         ];
 
         $response = [
-            'msg' => 'Meeting Updated',
+            'message' => 'Stuff Updated',
             'meeting' => $request
         ];
 
@@ -148,7 +146,7 @@ class BarangController extends Controller
         // }
 
         $response = [
-            'msg' => 'Meeting Deleted',
+            'message' => 'Stuff Deleted',
             'create' => [
                 'href' => 'api/v1/meeting',
                 'method' => 'POST',

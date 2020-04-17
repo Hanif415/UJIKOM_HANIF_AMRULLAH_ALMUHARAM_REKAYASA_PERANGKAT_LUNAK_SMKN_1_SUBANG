@@ -20,4 +20,9 @@ class Masyarakat extends Model
     {
         return $this->hasMany(History::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

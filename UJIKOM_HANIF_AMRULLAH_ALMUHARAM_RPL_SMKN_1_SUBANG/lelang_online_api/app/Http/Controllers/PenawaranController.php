@@ -2,83 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Barang;
+use App\History;
+use App\Lelang;
+use App\Masyarakat;
 use Illuminate\Http\Request;
 
 class PenawaranController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $harga_penawaran = $request->input('harga_penawaran');
+        $id_user = $request->input('id_user');
+
+        $lelang = Lelang::where('id_lelang', $id)->firstOrFail();
+
+        if ($lelang->status == "ditutup") {
+            $response = [
+                'message' => 'Auction not open yet',
+            ];
+        } else if ($lelang->harga_akhir >= $harga_penawaran) {
+            $response = [
+                'message' => 'Price must be higher',
+            ];
+        } else {
+            $lelang->harga_akhir = $harga_penawaran;
+            $lelang->id_masyarakat = $id_user;
+            $lelang->update();
+            $response = [
+                'message' => 'BID succsess',
+            ];
+        }
+
+        return response()->json($response, 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function histori()
     {
-        //
+        $histori = History::all();
+
+        foreach ($histori as $historis) {
+            $barang = Barang::where('id_barang', $historis->id_barang)->firstOrFail();
+            $masyarakat = Masyarakat::where('id_masyarakat', $historis->id_masyarakat)->firstOrFail();
+            $historis->id_barang = $barang->nama_barang;
+            $historis->id_masyarakat = $masyarakat->nama_lengkap;
+        }
+
+        $response = [
+            'message' => 'List of All Histoty',
+            'history_result' => $histori
+        ];
+
+        return response()->json($response, 200);
     }
 }

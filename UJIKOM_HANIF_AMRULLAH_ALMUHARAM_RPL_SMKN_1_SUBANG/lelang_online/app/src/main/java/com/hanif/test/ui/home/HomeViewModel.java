@@ -25,7 +25,7 @@ public class HomeViewModel extends ViewModel {
     private MutableLiveData<ArrayList<Auction>> listAuction = new MutableLiveData<>();
     List<Auction> _listAuction = new ArrayList<>();
 
-    public void setAuction(final String auction) {
+    void setAuction(final String auction) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.43.253:8000/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())

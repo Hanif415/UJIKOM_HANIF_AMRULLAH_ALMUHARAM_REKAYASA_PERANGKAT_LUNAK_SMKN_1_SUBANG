@@ -16,12 +16,10 @@ class CreatePetugasTable extends Migration
         Schema::create('petugas', function (Blueprint $table) {
             $table->bigIncrements('id_petugas');
             $table->string('nama_petugas');
-            $table->string('username');
-            $table->string('password');
-            $table->bigInteger('level')->unsigned()->index()->nullable();
+            $table->bigInteger('id_user')->unsigned()->index()->nullable();
             $table->timestamps();
 
-            $table->foreign('level')->references('id_level')->on('levels')->onDelete('cascade');
+            $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
         });
     }
 

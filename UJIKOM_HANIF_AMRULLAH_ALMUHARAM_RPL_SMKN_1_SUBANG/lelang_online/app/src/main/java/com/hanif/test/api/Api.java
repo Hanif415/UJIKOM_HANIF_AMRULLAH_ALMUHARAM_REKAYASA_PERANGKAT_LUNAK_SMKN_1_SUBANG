@@ -8,6 +8,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface Api {
 
@@ -29,4 +30,9 @@ public interface Api {
                           @Field("nama_lengkap") String fullName,
                           @Field("id_level") String idLevel,
                           @Field("telp") String phoneNumber);
+
+    @FormUrlEncoded
+    @PUT(" ")
+    Call<Result> bid(@Field("harga_penawaran") String bidPrice,
+                     @Field("id_user") String idUser);
 }

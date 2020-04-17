@@ -7,8 +7,8 @@ use App\Petugas;
 
 class Level extends Model
 {
-    public function petugas()
+    public function users()
     {
-        return $this->hasMany(Petugas::class);
+        return $this->hasMany(User::class);
     }
 }

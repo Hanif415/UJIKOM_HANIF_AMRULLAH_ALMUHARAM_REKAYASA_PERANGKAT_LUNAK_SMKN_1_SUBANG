@@ -22,5 +22,8 @@
     <string name="update_label">Update</string>
     <string name="description_hint">Description</string>
     <string name="stuff_price_hint">Stuff Price</string>
+    <string name="auction_price">Auction Price</string>
+    <string name="bid">BID</string>
+    <string name="close">Close</string>
 
 </resources>

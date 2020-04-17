@@ -23,6 +23,17 @@ public class Result {
     @SerializedName("results")
     List<Auction> resultAuction;
 
+    @SerializedName("history_result")
+    List<History> historyResult;
+
+    public List<History> getHistoryResult() {
+        return historyResult;
+    }
+
+    public void setHistoryResult(List<History> historyResult) {
+        this.historyResult = historyResult;
+    }
+
     public String getValue() {
         return value;
     }

@@ -21,4 +21,6 @@
     <string name="update_label">Update</string>
     <string name="description_hint">Description</string>
     <string name="stuff_price_hint">Stuff Price</string>
+    <string name="history">History</string>
+    <string name="highest_bidder">highest bidder</string>
 </resources>

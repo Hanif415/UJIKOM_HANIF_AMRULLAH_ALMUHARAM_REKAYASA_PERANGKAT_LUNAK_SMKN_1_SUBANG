@@ -1,9 +1,16 @@
 package com.hanif.test;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
@@ -40,6 +47,12 @@ public class DetailAuctionStuffFragment extends Fragment implements View.OnClick
     private UserPreference mUserPreference;
     private User user;
 
+    public static final int NOTIFICATION_ID = 1;
+    public static String CHANNEL_ID = "channel_01";
+    public static CharSequence CHANNEL_NAME = "my channel";
+
+    public static String auctionId;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_detail_auction_stuff, container, false);
@@ -49,13 +62,15 @@ public class DetailAuctionStuffFragment extends Fragment implements View.OnClick
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        auctionId = getArguments().getString(AuctionAdapter.StuffViewHolder.EXTRA_ID);
+
         mUserPreference = new UserPreference(getActivity());
 
         progressBar = view.findViewById(R.id.progressbar);
 
         tvStuffName = view.findViewById(R.id.tv_stuff_name);
         tvStuffDescription = view.findViewById(R.id.tv_stuff_description);
-        String id = getArguments().getString(AuctionAdapter.StuffViewHolder.EXTRA_ID);
+
 //        Initialised SwipeRefreshLayout
         swLayout = view.findViewById(R.id.swlayout);
 
@@ -64,9 +79,10 @@ public class DetailAuctionStuffFragment extends Fragment implements View.OnClick
         navBar.setVisibility(View.GONE);
 
 //        get stuff price and put into textView
-        TextView tvStuffPrice = view.findViewById(R.id.tv_stuff_price);
-//        String stuffPrice = getArguments().getString(AuctionAdapter.StuffViewHolder.EX);
-//        tvStuffPrice.setText(stuffPrice);
+        TextView tvHighestPrice = view.findViewById(R.id.tv_highest_price);
+
+        String highest_price = getArguments().getString(AuctionAdapter.StuffViewHolder.EXTRA_PRICE);
+        tvHighestPrice.setText(highest_price);
 
         ImageButton btnBid = view.findViewById(R.id.img_btn_bid);
         btnBid.setOnClickListener(this);
@@ -124,14 +140,35 @@ public class DetailAuctionStuffFragment extends Fragment implements View.OnClick
         } else {
             Navigation.findNavController(view).navigate(R.id.action_detailAuctionStuffFragment_to_loginFragment);
         }
-
-
     }
 
     public BIDDialogFragment.OnOptionDialogListener optionDialogListener = new BIDDialogFragment.OnOptionDialogListener() {
         @Override
         public void onOptionChosen(String text) {
-            
+            Toast.makeText(getActivity(), BIDDialogFragment.message, Toast.LENGTH_SHORT).show();
+            NotificationManager mNotificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getActivity(), CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_notifications_black_24dp))
+                    .setContentTitle("BID")
+                    .setContentText("anda telah melelang sebuah " + getArguments().getString(AuctionAdapter.StuffViewHolder.EXTRA_STUFF))
+                    .setAutoCancel(true);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+                channel.setDescription(CHANNEL_NAME.toString());
+                mBuilder.setChannelId(CHANNEL_ID);
+                if (mNotificationManager != null) {
+                    mNotificationManager.createNotificationChannel(channel);
+                }
+            }
+
+            Notification notification = mBuilder.build();
+
+            if (mNotificationManager != null) {
+                mNotificationManager.notify(NOTIFICATION_ID, notification);
+            }
         }
     };
 }

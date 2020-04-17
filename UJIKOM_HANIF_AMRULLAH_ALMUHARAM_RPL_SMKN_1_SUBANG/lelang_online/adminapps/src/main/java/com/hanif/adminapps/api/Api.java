@@ -16,6 +16,9 @@ public interface Api {
     @GET("barang")
     Call<Result> viewStuff();
 
+    @GET("histori")
+    Call<Result> viewHistory();
+
     @GET(" ")
     Call<Stuff> getStuff();
 

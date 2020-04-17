@@ -19,7 +19,7 @@ class Lelang extends Model
 
     public function barang()
     {
-        return $this->belongsTo(Barang::class);
+        return $this->belongsTo(Barang::class, 'id_barang');
     }
 
     public function history()

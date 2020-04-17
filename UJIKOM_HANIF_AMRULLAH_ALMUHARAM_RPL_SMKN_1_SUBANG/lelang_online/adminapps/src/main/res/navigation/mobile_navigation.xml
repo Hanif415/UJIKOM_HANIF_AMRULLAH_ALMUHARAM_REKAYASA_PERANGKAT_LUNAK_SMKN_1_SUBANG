@@ -74,5 +74,10 @@
         android:name="com.hanif.adminapps.ui.login.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="com.hanif.adminapps.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
 
 </navigation>

@@ -10,8 +10,8 @@ class Petugas extends Model
     protected $guarded = ['id_petugas'];
     protected $primaryKey = 'id_petugas';
 
-    public function level()
+    public function user()
     {
-        return $this->belongsTo(Level::class);
+        return $this->belongsTo(User::class);
     }
 }
